@@ -1,0 +1,72 @@
+{
+  "name": "envhub",
+  "version": "1.0.0",
+  "description": "EnvHub - 开发环境一站式管理客户端",
+  "main": "src/main/main.js",
+  "author": "EnvHub",
+  "license": "MIT",
+  "scripts": {
+    "dev": "concurrently -k \"cross-env NODE_ENV=development electron .\" \"wait-on tcp:5173 && vite\"",
+    "dev:renderer": "vite",
+    "start": "cross-env NODE_ENV=development electron .",
+    "build:renderer": "vite build",
+    "pack": "npm run build:renderer && electron-builder --dir",
+    "dist": "npm run build:renderer && electron-builder --win nsis"
+  },
+  "dependencies": {
+    "@electron/notarize": "^3.1.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.0",
+    "cross-env": "^7.0.3",
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "vite": "^6.0.3",
+    "wait-on": "^8.0.1"
+  },
+  "build": {
+    "appId": "com.envhub.desktop",
+    "productName": "EnvHub",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "src/main/**/*",
+      "src/preload/**/*",
+      "dist/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.ico",
+      "artifactName": "EnvHub-Setup-${version}-${arch}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "EnvHub",
+      "deleteAppDataOnUninstall": false,
+      "uninstallDisplayName": "EnvHub ${version}",
+      "installerLanguages": [
+        "zh_CN",
+        "en_US"
+      ],
+      "language": "2052"
+    }
+  }
+}

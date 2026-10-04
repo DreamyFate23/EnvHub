@@ -1,0 +1,43 @@
+# 依赖
+node_modules/
+
+# 构建产物
+dist/
+release/
+build/icon.ico
+*.tsbuildinfo
+
+# 打包缓存
+.vite/
+.cache/
+
+# 日志
+*.log
+npm-debug.log*
+yarn-error.log*
+
+# 环境与密钥（重要：不要提交任何凭据）
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# 编辑器
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+
+# 系统文件
+Thumbs.db
+ehthumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# 测试生成的临时产物
+preview.png
+test-output/
+*.part
